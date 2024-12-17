@@ -1,0 +1,14 @@
+import jugadores.*
+import nave.*
+
+describe "Primera parte - Jugadores" {
+    const mati = new Tripulante()
+  test " Saber si un jugador es sospechoso" {
+    assert.equals(false, nave.esSospechoso(mati))
+  }
+
+  test "Busca Item"{
+    mati.buscarItem("llaveInglesa")
+    assert.equals(true, mati.tieneItem("llaveInglesa"))
+  }
+}

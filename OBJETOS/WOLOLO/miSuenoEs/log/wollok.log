@@ -1,0 +1,9 @@
+{"level":"info","message":"⌛ Building environment","timeElapsed":364,"timestamp":"2024-10-13T21:57:28.698Z"}
+{"level":"info","message":"onRequest - WORKSPACE_URI:file:///c%3A/Users/matia/Documents/IMPORTANTE/PROGRAMAS/WOLLOK/WOLOLO/miSuenoEs","timestamp":"2024-10-13T21:57:28.705Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":333,"timestamp":"2024-10-13T21:57:29.040Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":130,"timestamp":"2024-10-13T21:57:29.391Z"}
+{"level":"info","message":"⌛ Validating persona.wlk","timeElapsed":300,"timestamp":"2024-10-13T21:57:29.698Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":225,"timestamp":"2024-10-13T21:57:29.923Z"}
+{"level":"info","message":"⌛ Validating punto1.wtest","timeElapsed":237,"timestamp":"2024-10-13T21:57:30.194Z"}
+{"level":"info","message":"⌛ Validating persona.wlk","timeElapsed":148,"timestamp":"2024-10-13T21:57:30.344Z"}
+{"level":"info","message":"⌛ Validating punto1.wtest","timeElapsed":195,"timestamp":"2024-10-13T21:57:30.540Z"}

@@ -1,0 +1,79 @@
+import gandalf.*
+import armas.*
+import guerrero.*
+
+describe "Arsenal" {
+    const arco = new Arco(largo = 110)
+  test "Espada con multiplicador de 15 y de origen Enano" {
+    const espadachin = new Espada(multiplicadorDePoder = 15, origen = new Enana())
+    assert.equals(300, espadachin.poderio())    
+  }
+  test "Daga con multiplicador de 15 y origen Enano" {
+    const daguin = new Daga(multiplicadorDePoder = 15, origen = new Enana())
+    assert.equals(150, daguin.poderio())
+  }
+  test "Hacha con mango de 50 cm, con una hoja de 5kg." {
+    const hacha = new Hacha(mango = 50, hojaMetalica = 5)
+    assert.equals(250, hacha.poderio())
+  }
+  test "Arco con longitud de 110cm" {
+    assert.equals(440, arco.poderio())
+  }
+  test "Modificar la tensión del arco a 35kg. Mismo arco que antes…" {
+    arco.tension(35)
+    assert.equals(385, arco.poderio())
+  }
+}
+
+describe "Guerreros" {
+
+  const espadaElfica8 = new Espada(origen = new Elfica(), multiplicadorDePoder = 8)
+  const frodo = new Guerrero(raza = new Hobbit(), vida = 50, armas = [espadaElfica8])
+
+  const hacha1 = new Hacha(mango = 70, hojaMetalica = 5)
+  const gimli = new Guerrero(raza = new Enano(factorDelPoder = 3), vida = 75, armas = [hacha1, hacha1])
+
+  const arco1 = new Arco(largo = 110)
+  const espadaElfica12 = new Espada(origen = new Elfica(), multiplicadorDePoder = 12)
+  const elfo1 = new Elfo(destrezaPropia = 1)
+  const legolas = new Guerrero(raza = elfo1, vida = 80, armas = [arco1, espadaElfica12])
+
+  const anduril = new Espada(origen = new Elfica(), multiplicadorDePoder = 18)
+  const daga = new Daga(origen = new Enana(), multiplicadorDePoder = 10)
+  const aragon = new Guerrero(raza = new Humano(limitadorDePoder = 20), vida = 85, armas = [anduril, daga])
+
+  const glamdring = new Espada(origen = new Elfica(), multiplicadorDePoder = 10)
+  const baculoG = new Baculo(poder = 400)
+  const gandalf = new Guerrero(raza = new Maiar(), vida = 100, armas = [glamdring, baculoG])
+
+
+  test "Poder de Frodo (sin items)" {
+      assert.equals(290, frodo.poderio())
+  }
+  test "Poder de Gimli" {
+    assert.equals(2175, gimli.poderio())
+  }
+  test "Poder de Légolas" {
+    assert.equals(2480, legolas.poderio())
+    // me da 2300
+  }
+  test "Poder de Aragorn" {
+    assert.equals(2720, aragon.poderio())
+    // me da 2337.5
+  }
+  test "Poder de Gandalf" {
+    assert.equals(2900, gandalf.poderio())
+    // me da 2800
+  }
+  test "Gandalf con 9 de vida, y todas sus armas" {
+    gandalf.vida(9)
+    assert.equals(4100, gandalf.poderio())
+    // me da 4000
+  }
+
+  test "Poder de Légolas que obtiene medio punto de destreza adicional propia" {
+    legolas.raza().destrezaPropia(1.5)
+    assert.equals(2880, legolas.poderio())
+    // me da 2670
+  }
+}

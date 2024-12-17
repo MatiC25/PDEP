@@ -1,0 +1,65 @@
+import gandalf.*
+import armas.*
+import guerrero.*
+import zonas3.*
+import requerimientos.*
+import camino.*
+import grupo.*
+
+
+describe "Test de Caminos - Parte 3" {
+    // const bosqueF = new BosqueDeFangorn()
+
+    const edoras = new Edoras()
+    const lebennin = new Lebennin()
+    const estemnet = new Estremnet() // 30 lembas
+    const belfalas = new Belfalas()
+    const camino = new CaminoGondor(zonas = [estemnet])
+    const caminoEz = new CaminoGondor(zonas = [belfalas, edoras])
+    const humana = new Humano(limitadorDePoder = 3)
+    const petes = new Grupo(personas = [mati, facu])
+    const arcoMati = new Arco(largo = 1)
+    const mati = new Guerrero(raza = humana, vida = 80, items = ["lemba", "Lemba"])
+    const facu = new Guerrero(raza = humana, vida = 20, items = ["Lemba", "Lemba"])
+
+  test "Un grupo no puede pasar por una zona por requerimiento de ítem" {
+    assert.that(!petes.puedeAtravesar(estemnet))
+  }
+
+  test "Un grupo no puede pasar por una zona por requerimiento de guerrero" {
+    assert.that(!petes.puedeAtravesar(lebennin))    
+  }
+
+    test "Un grupo puede pasar por una zona" {
+        assert.that(petes.puedeAtravesar(belfalas))
+    }
+
+    test "Un grupo no puede atravesar un camino" {
+      assert.that(!petes.puedeAtravesar(camino))
+    }
+
+    test "Un grupo puede atravesar un camino" {
+        assert.that(petes.puedeAtravesar(caminoEz))
+    }
+
+}
+
+describe "Camino Limitrofes" {
+    const minasTirith2 = new MinasTirith()
+    const edoras2 = new Edoras(zonasLimitrofes = [])
+    const lebennin2 = new Lebennin(zonasLimitrofes = [belfalas2, minasTirith2])
+    const estemnet2 = new Estremnet(zonasLimitrofes = []) // 30 lembas
+
+    const belfalas2 = new Belfalas(zonasLimitrofes = [lebennin2, lamedon2])
+    const lamedon2 = new Lamedon(zonasLimitrofes = [edoras2, belfalas2])
+
+    const camino1 = new CaminoGondor(zonas = [belfalas2, edoras2])
+    const camino2 = new CaminoGondor(zonas = [belfalas2, lebennin2, minasTirith2])
+  test "Camino no es valido" {
+      assert.notThat(camino1.esValido())
+  }
+
+  test "Camino es valido"{
+    assert.that(camino2.esValido())
+  }
+}

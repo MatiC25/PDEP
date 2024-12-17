@@ -1,0 +1,45 @@
+import medico.*
+import enfermedad.*
+import persona.*
+import enfermedadAuto.*
+import enfermedadInfec.*
+
+
+
+describe "dr Casa Temperoada 1" {
+const malaria = new EnfermedadInfecciosa(celulasAmenzadas = 500)
+const otitis = new EnfermedadInfecciosa(celulasAmenzadas = 100)
+const lupus = new EnfermedadInfecciosa(celulasAmenzadas = 1000)
+
+const malaria2 = new EnfermedadInfecciosa(celulasAmenzadas = 800)
+
+const logan = new Persona (temperatura = 36, celulasTotales = 3000000, enfermedades = #{malaria, otitis, lupus})
+
+const frank = new Persona (temperatura = 36, celulasTotales = 3500000)
+
+// const drHouse = new Medico (dosis = 20)
+
+method initialize(){
+    frank.contrae(malaria2)
+    malaria.reproducirse()
+}
+
+
+test "1. Cuando frank contrae una enfermedad esta es agregada a la coleccion"{
+    frank.contrae(malaria)
+    assert.that(frank.tieneEnfermedad(malaria))
+}
+
+test "4. Logan vive 31 dias con una enfermedad (las autoInmunes se vuelven agresivas)"{
+    logan.vivirDias(31)
+}
+}
+
+describe "dr Casa - Temporada 2" {
+    const malaria = new EnfermedadInfecciosa(celulasAmenzadas = 500)
+  test "la malaria se atenua en 100 celulas" {
+    malaria.atenuarse(100)
+    
+  }
+}
+

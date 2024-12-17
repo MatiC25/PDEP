@@ -1,0 +1,19 @@
+import persona.*
+
+
+describe "Punto 1 - Cumplir Sueños" {
+  test "Cumplir sueño de recibirse de IngEnSistemas" {
+  const ingSistemas = new Recibirse(carrera = "IngSistemas")  
+  const juli = new Persona(carrerasDeseadas = #{ingSistemas})
+  juli.cumplir(ingSistemas)
+  assert.equals(true, juli.estaCumplido(ingSistemas))
+  }
+
+//   test "Tener un pibe (que paja, mal ahi)" {
+
+//   }
+
+//   test "laburo digno" {
+    
+//   }
+}

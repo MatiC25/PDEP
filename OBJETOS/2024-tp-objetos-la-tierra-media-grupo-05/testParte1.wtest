@@ -1,0 +1,74 @@
+import gandalf.*
+import armas.*
+import guerrero.*
+
+describe "Test del gordo Gandalf" {
+
+  test "Poder de Gandalf con toda la vida y todas sus armas" {
+    const glamdring = new EspadaElfica() 
+    const gandalf = new Gandalf(armas = #{baculo, glamdring}, vida = 100)
+    assert.equals(2800, gandalf.poder())
+  }
+
+  test "Poder de Gandalf sin armas y con 80 de vida" {
+    const gandalf = new Gandalf(vida = 80)
+    assert.equals(1200, gandalf.poder())
+  }
+
+    test "Poder de Gandalf con 5 de vida y su báculo" {
+    const gandalf = new Gandalf(armas = #{baculo}, vida = 5)
+    assert.equals(2300, gandalf.poder())
+  }
+    test "Poder de Gandalf con 30 de vida, su báculo y su espada pero versión enana" {
+    const espada = new EspadaEnana()
+    const gandalf = new Gandalf(armas = #{baculo, espada}, vida = 30)
+    assert.equals(1650, gandalf.poder())
+  }
+}
+
+describe "Test recorriendo la Tierra Media - Zonas y Caminos" {
+  test "Gandalf full vida y con sus armas, puede atravesar Lebennin" {
+    const espada = new EspadaElfica()
+    const gandalf = new Gandalf(armas = #{baculo, espada}, vida = 100)
+    assert.that(gandalf.puedeAtravesar(lebennin))
+  }
+
+  test "Gandalf sin armas y con 11 de vida puede atravesar Lebennin" {
+    const gandalf = new Gandalf(vida = 11)
+    assert.that(gandalf.puedeAtravesar(lebennin))
+  }
+
+  test "Gandalf sin armas y con 11 de vida puede atravesar Minas Tirith" {
+    const gandalf = new Gandalf(vida = 11)
+    assert.notThat(gandalf.puedeAtravesar(minasTirith))
+  }
+  test "Gandalf full vida y con sus armas, puede atravesar el camino compuesto por Lebennin y Minas Tirith" {
+    const espada = new EspadaElfica()
+    const gandalf = new Gandalf(armas = #{baculo, espada}, vida = 100)
+    const camino = new CaminoGondor(zonas = #{lebennin, minasTirith})
+    assert.that(gandalf.puedeAtravesar(camino))
+  }
+
+  test "Gandalf full vida y con sus armas, atraviesa el camino compuesto por Lebennin y Minas Tirith" {
+    const espada = new EspadaElfica()
+    const gandalf = new Gandalf(armas = #{baculo, espada}, vida = 100)
+    const camino = new CaminoGondor(zonas = #{lebennin, minasTirith})
+    gandalf.atravesar(camino)
+    assert.equals(90, gandalf.vida())
+  }
+
+}
+
+describe "Test de Tom" {
+  test "Tom puede atravesar Lebennin" {
+      const tom = new TomBardi(vida = 100)
+      assert.that(tom.puedeAtravesar(lebennin))
+  }
+
+  test "Tom atraviesa el camino que pasa por Gondor antes mencionado" {
+      const camino = new CaminoGondor(zonas = #{lebennin, minasTirith})
+      const tom = new TomBardi(vida = 100)
+      tom.atravesar(camino)
+      assert.equals(100, tom.vida())
+  }
+}
